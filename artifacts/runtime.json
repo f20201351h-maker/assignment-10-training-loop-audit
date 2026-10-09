@@ -1,0 +1,12 @@
+{
+  "data": 0.36,
+  "autopsy": 1.05,
+  "gradcheck": 0.47,
+  "accumulation_checks": 0.89,
+  "accumulation_runs": 69.42,
+  "main_run": 87.81,
+  "mfu_matmul": 2.16,
+  "mfu_bench": 108.03,
+  "precision_compare": 47.02,
+  "notebook_total": 328.4
+}

@@ -1,0 +1,189 @@
+{
+  "derivation": {
+    "fp32": {
+      "format": "fp32",
+      "sign": 0,
+      "exp_bits": 8,
+      "man_bits": 23,
+      "bias": 127,
+      "unbiased_exp": -4,
+      "biased_exp": 123,
+      "exp_field": "01111011",
+      "mantissa_kept_before_rounding": "10011001100110011001100",
+      "first_dropped_bits": "11001100",
+      "rounding": "round up (remainder > 1/2 ULP)",
+      "mantissa_field": "10011001100110011001101",
+      "bits": "00111101110011001100110011001101",
+      "bits_grouped": "0 | 01111011 | 10011001100110011001101",
+      "hex": "0x3DCCCCCD",
+      "value_exact": "13421773/134217728",
+      "value": 0.10000000149011612,
+      "abs_error": 1.4901161193847657e-09,
+      "rel_error": 1.4901161193847656e-08,
+      "ulp_at_value": 7.450580596923828e-09
+    },
+    "bf16": {
+      "format": "bf16",
+      "sign": 0,
+      "exp_bits": 8,
+      "man_bits": 7,
+      "bias": 127,
+      "unbiased_exp": -4,
+      "biased_exp": 123,
+      "exp_field": "01111011",
+      "mantissa_kept_before_rounding": "1001100",
+      "first_dropped_bits": "11001100",
+      "rounding": "round up (remainder > 1/2 ULP)",
+      "mantissa_field": "1001101",
+      "bits": "0011110111001101",
+      "bits_grouped": "0 | 01111011 | 1001101",
+      "hex": "0x3DCD",
+      "value_exact": "205/2048",
+      "value": 0.10009765625,
+      "abs_error": 9.765625e-05,
+      "rel_error": 0.0009765625,
+      "ulp_at_value": 0.00048828125
+    },
+    "fp8 E4M3 (OCP 'fn')": {
+      "format": "fp8 E4M3 (OCP 'fn')",
+      "sign": 0,
+      "exp_bits": 4,
+      "man_bits": 3,
+      "bias": 7,
+      "unbiased_exp": -4,
+      "biased_exp": 3,
+      "exp_field": "0011",
+      "mantissa_kept_before_rounding": "100",
+      "first_dropped_bits": "11001100",
+      "rounding": "round up (remainder > 1/2 ULP)",
+      "mantissa_field": "101",
+      "bits": "00011101",
+      "bits_grouped": "0 | 0011 | 101",
+      "hex": "0x1D",
+      "value_exact": "13/128",
+      "value": 0.1015625,
+      "abs_error": 0.0015625,
+      "rel_error": 0.015625,
+      "ulp_at_value": 0.0078125
+    },
+    "fp8 E5M2": {
+      "format": "fp8 E5M2",
+      "sign": 0,
+      "exp_bits": 5,
+      "man_bits": 2,
+      "bias": 15,
+      "unbiased_exp": -4,
+      "biased_exp": 11,
+      "exp_field": "01011",
+      "mantissa_kept_before_rounding": "10",
+      "first_dropped_bits": "01100110",
+      "rounding": "round down (remainder < 1/2 ULP)",
+      "mantissa_field": "10",
+      "bits": "00101110",
+      "bits_grouped": "0 | 01011 | 10",
+      "hex": "0x2E",
+      "value_exact": "3/32",
+      "value": 0.09375,
+      "abs_error": 0.00625,
+      "rel_error": 0.0625,
+      "ulp_at_value": 0.015625
+    },
+    "fp16": {
+      "format": "fp16",
+      "sign": 0,
+      "exp_bits": 5,
+      "man_bits": 10,
+      "bias": 15,
+      "unbiased_exp": -4,
+      "biased_exp": 11,
+      "exp_field": "01011",
+      "mantissa_kept_before_rounding": "1001100110",
+      "first_dropped_bits": "01100110",
+      "rounding": "round down (remainder < 1/2 ULP)",
+      "mantissa_field": "1001100110",
+      "bits": "0010111001100110",
+      "bits_grouped": "0 | 01011 | 1001100110",
+      "hex": "0x2E66",
+      "value_exact": "819/8192",
+      "value": 0.0999755859375,
+      "abs_error": 2.44140625e-05,
+      "rel_error": 0.000244140625,
+      "ulp_at_value": 6.103515625e-05
+    }
+  },
+  "library": {
+    "fp32": "0x3DCCCCCD",
+    "bf16": "0x3DCD",
+    "fp8 E4M3 (OCP 'fn')": "0x1D",
+    "fp8 E5M2": "0x2E"
+  },
+  "ranges": [
+    {
+      "format": "fp32",
+      "max_finite": 3.4028234663852886e+38,
+      "min_normal": 1.1754943508222875e-38,
+      "min_subnormal": 1.401298464324817e-45,
+      "decimal_digits": 7.22
+    },
+    {
+      "format": "fp16",
+      "max_finite": 65504.0,
+      "min_normal": 6.103515625e-05,
+      "min_subnormal": 5.960464477539063e-08,
+      "decimal_digits": 3.31
+    },
+    {
+      "format": "bf16",
+      "max_finite": 3.3895313892515355e+38,
+      "min_normal": 1.1754943508222875e-38,
+      "min_subnormal": 9.183549615799121e-41,
+      "decimal_digits": 2.41
+    },
+    {
+      "format": "fp8 E4M3 (OCP 'fn')",
+      "max_finite": 448.0,
+      "min_normal": 0.015625,
+      "min_subnormal": 0.001953125,
+      "decimal_digits": 1.2
+    },
+    {
+      "format": "fp8 E5M2",
+      "max_finite": 57344.0,
+      "min_normal": 6.103515625e-05,
+      "min_subnormal": 1.52587890625e-05,
+      "decimal_digits": 0.9
+    }
+  ],
+  "training_demos": {
+    "torch.float32": {
+      "single_update_lost": false,
+      "after_1000_updates": 0.20000168681144714
+    },
+    "torch.bfloat16": {
+      "single_update_lost": true,
+      "after_1000_updates": 0.10009765625
+    },
+    "e4m3_1e-4": 0.0
+  },
+  "fp8_hardware": {
+    "capability": [
+      8,
+      6
+    ],
+    "fp8_matmul": "failed",
+    "error": "torch._scaled_mm is only supported on CUDA devices with compute capability >= 9.0 or 8.9, or ROCm MI300+"
+  },
+  "precision_compare": {
+    "steps": 300,
+    "final_probe_loss": {
+      "bf16": 1.8690963983535767,
+      "fp32": 1.8667685985565186
+    },
+    "max_abs_probe_loss_diff": 0.03959393501281738,
+    "median_tok_per_s": {
+      "bf16": 343375.3075988099,
+      "fp32": 175203.82148932217
+    },
+    "bf16_speedup": 1.9598619749269393
+  }
+}

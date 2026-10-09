@@ -1,0 +1,101 @@
+check,passed,detail
+vocabulary is the 65 Tiny Shakespeare characters,True,65
+train/val split is disjoint and complete,True,
+H x D == C,True,6 x 64 = 384
+context used fits the position table,True,"T=256, Tmax=256"
+every parameter's actual shape equals its symbolic shape,True,
+unique parameter count matches the hand formula,True,"10,745,088"
+every parameter is trainable,True,
+"lm_head.weight IS transformer.wte.weight (tied, one tensor)",True,
+naive sum double-counts exactly the tied V*C,True,
+block parameter count = 12C^2 + 2C,True,1770240
+group breakdown sums to total,True,
+MLP hidden width is 4C,True,
+lm_head maps C -> V,True,
+targets are inputs shifted left by one,True,
+every traced tensor's shape equals its symbolic shape,True,135 tensors checked
+all L blocks produce identical shapes for every traced tensor,True,
+attention rows sum to 1,True,max |sum-1| = 2.93e-03 (bf16 probs)
+causal: attention to future positions is exactly 0,True,
+explicit attention matches the fused SDPA kernel (bf16 tolerance),True,max abs diff 7.81e-03 vs max |y| 1.41e+00
+Q/K/V split: q is the first C columns of qkv,True,
+"head split is a pure reshape: q_heads[b,h,t,:] == q[b,t,h*D:(h+1)*D]",True,
+merge is the inverse of the split,True,
+"logits row (b,t) is the prediction for targets[b,t]",True,
+loss at init is close to ln V (uniform guess),True,loss 4.2959 vs ln(65) = 4.1744
+all gradients have their weight's shape and are finite,True,
+wte and lm_head each report the same tied V*C tensor,True,"24,960 each, one tensor in memory"
+layer params add up to the unique total once the tied tensor is counted once,True,"10,770,048 - 24,960 = 10,745,088"
+"every block's Linear layers output [B,T,3C], [B,T,C], [B,T,4C], [B,T,C]",True,
+autograd loss equals the no-grad loss at w,True,
+weight restored bit-for-bit (whole tensor),True,
+loss after restoring equals L(w) exactly,True,4.277940059721642
+finite difference agrees with backward() to 1e-6 relative,True,5.24e-10
+all sampled scalars restored exactly,True,
+all sampled scalars agree: |num - auto| <= 1e-6*|g| + 1e-9,True,worst abs err 5.83e-12
+loss unchanged after all sampled nudges,True,
+chosen eps sits in the valley: 100x below both ends of the fp64 sweep,True,eps 0.0001: 5.2e-10 | eps 0.1: 3.0e-05 | eps 1e-11: 4.6e-02 | best eps 1e-05: 5.2e-10
+Session 10 toy example reproduces 2.6 vs 3.0 (15.4%),True,
+with equal token counts the two agree exactly,True,
+every window has unequal valid-token counts,True,
+padding really is excluded: valid count < slots in every short micro-batch,True,
+right padding does not change logits at real positions,True,"max diff 8.5e-07, 56 real of 256"
+token-normalised accumulation == full batch gradient (unequal counts),True,3.2e-07
+token-normalised reported loss == full batch loss,True,
+average-of-averages gradient differs from full batch (unequal counts),True,1.8e-01
+average-of-averages is correct when counts are equal,True,2.8e-07
+short and long validation sets are non-empty,True,
+both runs start from the identical state dict,True,
+both runs logged every optimizer step,True,
+both runs saw identical valid-token counts per step,True,
+correct run: reported loss IS the token-weighted loss,True,
+losses finite in both runs,True,
+token accumulation still equals full batch at trained weights,True,
+grad norm recorded at every optimizer step from step 1,True,
+all grad norms and losses finite,True,
+torch's clip_grad_norm_ total equals my own per-parameter norm on every step,True,
+post-clip norm <= threshold (+fp slack) on every step,True,
+every step processed the configured number of tokens,True,
+the model learned: val loss fell by more than 2 nats/char,True,
+model fits comfortably on the GPU (< 50% of memory),True,1.31 GiB of 22.06
+event is natural: no data or weights were altered during the main run,True,
+in the retrospective analysis the norm turns before the probe loss for every window,True,"[135, 107, 106, 60]"
+causal grad-norm alarm precedes the causal probe-loss alarm,True,830 -> 904
+the GPU in use has a datasheet entry for the MFU denominator,True,NVIDIA A10G
+no measured bf16 matmul exceeds the datasheet peak (denominator is not too small),True,best 66.6 TF
+fp32 and TF32 matmuls stay under their datasheet peaks,True,23.0 / 34.0 TF
+"timed window >= 5 s: A. main config (B=32 x accum 2), CPU sampling + ",True,"6.0s, 128 steps"
+"timed window >= 5 s: B. main config, batches pre-staged on GPU",True,"6.0s, 129 steps"
+"timed window >= 5 s: C. main config, forward+backward only (no clip, ",True,"6.0s, 134 steps"
+"timed window >= 5 s: D. micro-batch 8 x accum 1 (2,048 tok/step), pre",True,"5.9s, 607 steps"
+"timed window >= 5 s: D. micro-batch 16 x accum 1 (4,096 tok/step), pr",True,"6.0s, 431 steps"
+"timed window >= 5 s: D. micro-batch 32 x accum 1 (8,192 tok/step), pr",True,"6.0s, 251 steps"
+"timed window >= 5 s: D. micro-batch 64 x accum 1 (16,384 tok/step), p",True,"6.0s, 138 steps"
+"timed window >= 5 s: D. micro-batch 128 x accum 1 (32,768 tok/step), ",True,"6.0s, 72 steps"
+"timed window >= 5 s: E. main config + torch.compile, pre-staged",True,"6.0s, 150 steps"
+"timed window >= 5 s: F. main config, fp32, TF32 off, pre-staged",True,"6.1s, 66 steps"
+"timed window >= 5 s: F. main config, fp32 with TF32 matmuls, pre-stag",True,"6.1s, 74 steps"
+the expansion repeats with period 4 (0011) after the first bit,True,
+0.1 = 1.6 x 2^-4,True,
+fp16 hand bits match torch.float16,True,
+fp32: hand-derived bits == library bits,True,
+fp32: library decodes to the hand value,True,
+fp32: independent decoder reads the bits back to the same value,True,
+fp32: encoding from float64(0.1) gives the same bits (no double-rounding issue),True,
+bf16: hand-derived bits == library bits,True,
+bf16: library decodes to the hand value,True,
+bf16: independent decoder reads the bits back to the same value,True,
+bf16: encoding from float64(0.1) gives the same bits (no double-rounding issue),True,
+fp8 E4M3 (OCP 'fn'): hand-derived bits == library bits,True,
+fp8 E4M3 (OCP 'fn'): library decodes to the hand value,True,
+fp8 E4M3 (OCP 'fn'): independent decoder reads the bits back to the same value,True,
+fp8 E4M3 (OCP 'fn'): encoding from float64(0.1) gives the same bits (no double-rounding issue),True,
+fp8 E5M2: hand-derived bits == library bits,True,
+fp8 E5M2: library decodes to the hand value,True,
+fp8 E5M2: independent decoder reads the bits back to the same value,True,
+fp8 E5M2: encoding from float64(0.1) gives the same bits (no double-rounding issue),True,
+bf16(0.1) is fp32(0.1) rounded to its top 16 bits,True,
+E4M3fn max finite is 448,True,
+bf16 and fp32 share the smallest normal (same 8-bit exponent),True,
+a 1e-4 update to a bf16 weight of 0.1 is lost entirely,True,
+E4M3 flushes a 1e-4 gradient to zero without a scale,True,

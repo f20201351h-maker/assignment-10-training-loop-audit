@@ -1,0 +1,113 @@
+{
+  "mode": "full",
+  "seed": 1337,
+  "model": {
+    "block_size": 256,
+    "n_layer": 6,
+    "n_head": 6,
+    "n_embd": 384,
+    "dropout": 0.0,
+    "bias": false
+  },
+  "main_run": {
+    "micro_batch": 32,
+    "grad_accum": 2,
+    "T": 256,
+    "max_steps": 1500,
+    "warmup_steps": 100,
+    "lr": 0.001,
+    "min_lr": 0.0001,
+    "betas": [
+      0.9,
+      0.99
+    ],
+    "weight_decay": 0.1,
+    "grad_clip": 1.0,
+    "precision": "bf16",
+    "eval_every": 50,
+    "n_val_batches": 20,
+    "val_batch": 64,
+    "probe_batch": 16
+  },
+  "gradcheck": {
+    "B": 4,
+    "T": 64,
+    "eps": 0.0001,
+    "param": "transformer.h.0.attn.c_attn.weight",
+    "n_random": 8,
+    "eps_sweep_fp64": [
+      0.1,
+      0.01,
+      0.001,
+      0.0001,
+      1e-05,
+      1e-06,
+      1e-07,
+      1e-08,
+      1e-09,
+      1e-10,
+      1e-11
+    ],
+    "eps_sweep_fp32": [
+      0.1,
+      0.03,
+      0.01,
+      0.003,
+      0.001,
+      0.0003,
+      0.0001,
+      1e-05,
+      1e-06,
+      1e-07
+    ]
+  },
+  "accumulation": {
+    "micro_batch": 8,
+    "n_micro": 4,
+    "T": 256,
+    "max_steps": 600,
+    "warmup_steps": 50,
+    "lr": 0.001,
+    "min_lr": 0.0001,
+    "betas": [
+      0.9,
+      0.99
+    ],
+    "weight_decay": 0.1,
+    "grad_clip": 1.0,
+    "precision": "bf16",
+    "eval_every": 25,
+    "cos_every": 10,
+    "val_batch": 64
+  },
+  "mfu": {
+    "n_warm": 15,
+    "n_timed": 60,
+    "batch_sweep": [
+      8,
+      16,
+      32,
+      64,
+      128
+    ],
+    "profile_steps": 5
+  },
+  "precision_compare": {
+    "max_steps": 300
+  },
+  "main_tokens_per_optimizer_step": 16384,
+  "optimizer": "AdamW (fused on CUDA), weight decay on >=2-D params only",
+  "schedule": "linear warm-up then cosine to min_lr (nanoGPT get_lr)",
+  "clipping": "clip_grad_norm_ at grad_clip, norm logged BEFORE clipping, every step",
+  "data": {
+    "name": "Tiny Shakespeare (karpathy/char-rnn)",
+    "url": "https://raw.githubusercontent.com/karpathy/char-rnn/master/data/tinyshakespeare/input.txt",
+    "sha256": "86c4e6aa9db7c042ec79f339dcb96d42b0075e16b8fc2e86bf0ca57e2dc565ed",
+    "chars": 1115394,
+    "tokenizer": "character level, sorted unique chars",
+    "vocab_size": 65,
+    "split": "first 90% train / last 10% val",
+    "train_tokens": 1003854,
+    "val_tokens": 111540
+  }
+}

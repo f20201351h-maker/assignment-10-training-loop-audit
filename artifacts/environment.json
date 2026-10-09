@@ -1,0 +1,15 @@
+{
+  "python": "3.11.12",
+  "torch": "2.5.1+cu124",
+  "numpy": "2.1.3",
+  "pandas": "2.2.3",
+  "matplotlib": "3.9.2",
+  "platform": "Linux-4.19.0-gvisor-x86_64-with-glibc2.36",
+  "gpu": "NVIDIA A10G",
+  "compute_capability": "8.6",
+  "sm_count": 80,
+  "memory_GiB": 22.06,
+  "nvidia_smi": "NVIDIA A10G, 23028 MiB, 610.57.04, 1710 MHz",
+  "cuda": "12.4",
+  "cudnn": 90100
+}

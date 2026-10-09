@@ -1,0 +1,31 @@
+{
+  "dims": {
+    "B": 32,
+    "T": 256,
+    "C": 384,
+    "H": 6,
+    "D": 64,
+    "V": 65,
+    "L": 6,
+    "Tmax": 256,
+    "T+1": 257
+  },
+  "N_total": 10745088,
+  "N_trainable": 10745088,
+  "N_formula": 10745088,
+  "N_nanogpt_excl_wpe": 10646784,
+  "per_block": 1770240,
+  "groups": {
+    "token embedding / lm_head (tied)": 24960,
+    "position embedding": 98304,
+    "attention (c_attn + c_proj) x L": 3538944,
+    "MLP (c_fc + c_proj) x L": 7077888,
+    "LayerNorm gains": 4992
+  },
+  "activation_memory": {
+    "saved_for_backward_MB": 695.78564453125,
+    "per_token_KB": 86.97320556640625,
+    "per_token_per_layer_KB": 14.495534261067709,
+    "weights_grads_adam_MB_at_16B_per_param": 163.95703125
+  }
+}

@@ -1,0 +1,40 @@
+parameter,module,symbolic,shape,numel,trainable,dtype,meaning
+transformer.wte.weight,Embedding,"[V,C]","[65, 384]",24960,True,float32,row v = embedding of character v; SAME tensor as lm_head.weight (tied)
+transformer.wpe.weight,Embedding,"[Tmax,C]","[256, 384]",98304,True,float32,row t = learned vector added at position t
+transformer.h.0.ln_1.weight,LayerNorm,[C],[384],384,True,float32,per-channel gain of the LayerNorm before attention
+transformer.h.0.attn.c_attn.weight,Linear,"[3C,C]","[1152, 384]",442368,True,float32,"[out,in]; rows 0:C make Q, C:2C make K, 2C:3C make V"
+transformer.h.0.attn.c_proj.weight,Linear,"[C,C]","[384, 384]",147456,True,float32,mixes the H concatenated head outputs back to the residual
+transformer.h.0.ln_2.weight,LayerNorm,[C],[384],384,True,float32,per-channel gain of the LayerNorm before the MLP
+transformer.h.0.mlp.c_fc.weight,Linear,"[4C,C]","[1536, 384]",589824,True,float32,expansion C -> 4C
+transformer.h.0.mlp.c_proj.weight,Linear,"[C,4C]","[384, 1536]",589824,True,float32,contraction 4C -> C
+transformer.h.1.ln_1.weight,LayerNorm,[C],[384],384,True,float32,per-channel gain of the LayerNorm before attention
+transformer.h.1.attn.c_attn.weight,Linear,"[3C,C]","[1152, 384]",442368,True,float32,"[out,in]; rows 0:C make Q, C:2C make K, 2C:3C make V"
+transformer.h.1.attn.c_proj.weight,Linear,"[C,C]","[384, 384]",147456,True,float32,mixes the H concatenated head outputs back to the residual
+transformer.h.1.ln_2.weight,LayerNorm,[C],[384],384,True,float32,per-channel gain of the LayerNorm before the MLP
+transformer.h.1.mlp.c_fc.weight,Linear,"[4C,C]","[1536, 384]",589824,True,float32,expansion C -> 4C
+transformer.h.1.mlp.c_proj.weight,Linear,"[C,4C]","[384, 1536]",589824,True,float32,contraction 4C -> C
+transformer.h.2.ln_1.weight,LayerNorm,[C],[384],384,True,float32,per-channel gain of the LayerNorm before attention
+transformer.h.2.attn.c_attn.weight,Linear,"[3C,C]","[1152, 384]",442368,True,float32,"[out,in]; rows 0:C make Q, C:2C make K, 2C:3C make V"
+transformer.h.2.attn.c_proj.weight,Linear,"[C,C]","[384, 384]",147456,True,float32,mixes the H concatenated head outputs back to the residual
+transformer.h.2.ln_2.weight,LayerNorm,[C],[384],384,True,float32,per-channel gain of the LayerNorm before the MLP
+transformer.h.2.mlp.c_fc.weight,Linear,"[4C,C]","[1536, 384]",589824,True,float32,expansion C -> 4C
+transformer.h.2.mlp.c_proj.weight,Linear,"[C,4C]","[384, 1536]",589824,True,float32,contraction 4C -> C
+transformer.h.3.ln_1.weight,LayerNorm,[C],[384],384,True,float32,per-channel gain of the LayerNorm before attention
+transformer.h.3.attn.c_attn.weight,Linear,"[3C,C]","[1152, 384]",442368,True,float32,"[out,in]; rows 0:C make Q, C:2C make K, 2C:3C make V"
+transformer.h.3.attn.c_proj.weight,Linear,"[C,C]","[384, 384]",147456,True,float32,mixes the H concatenated head outputs back to the residual
+transformer.h.3.ln_2.weight,LayerNorm,[C],[384],384,True,float32,per-channel gain of the LayerNorm before the MLP
+transformer.h.3.mlp.c_fc.weight,Linear,"[4C,C]","[1536, 384]",589824,True,float32,expansion C -> 4C
+transformer.h.3.mlp.c_proj.weight,Linear,"[C,4C]","[384, 1536]",589824,True,float32,contraction 4C -> C
+transformer.h.4.ln_1.weight,LayerNorm,[C],[384],384,True,float32,per-channel gain of the LayerNorm before attention
+transformer.h.4.attn.c_attn.weight,Linear,"[3C,C]","[1152, 384]",442368,True,float32,"[out,in]; rows 0:C make Q, C:2C make K, 2C:3C make V"
+transformer.h.4.attn.c_proj.weight,Linear,"[C,C]","[384, 384]",147456,True,float32,mixes the H concatenated head outputs back to the residual
+transformer.h.4.ln_2.weight,LayerNorm,[C],[384],384,True,float32,per-channel gain of the LayerNorm before the MLP
+transformer.h.4.mlp.c_fc.weight,Linear,"[4C,C]","[1536, 384]",589824,True,float32,expansion C -> 4C
+transformer.h.4.mlp.c_proj.weight,Linear,"[C,4C]","[384, 1536]",589824,True,float32,contraction 4C -> C
+transformer.h.5.ln_1.weight,LayerNorm,[C],[384],384,True,float32,per-channel gain of the LayerNorm before attention
+transformer.h.5.attn.c_attn.weight,Linear,"[3C,C]","[1152, 384]",442368,True,float32,"[out,in]; rows 0:C make Q, C:2C make K, 2C:3C make V"
+transformer.h.5.attn.c_proj.weight,Linear,"[C,C]","[384, 384]",147456,True,float32,mixes the H concatenated head outputs back to the residual
+transformer.h.5.ln_2.weight,LayerNorm,[C],[384],384,True,float32,per-channel gain of the LayerNorm before the MLP
+transformer.h.5.mlp.c_fc.weight,Linear,"[4C,C]","[1536, 384]",589824,True,float32,expansion C -> 4C
+transformer.h.5.mlp.c_proj.weight,Linear,"[C,4C]","[384, 1536]",589824,True,float32,contraction 4C -> C
+transformer.ln_f.weight,LayerNorm,[C],[384],384,True,float32,final LayerNorm gain

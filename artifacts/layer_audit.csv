@@ -1,0 +1,47 @@
+module,type,params,trainable,input shape,output shape,output elements,output dtype,output MB
+transformer.wte,Embedding,24960,True,"(32, 256)","(32, 256, 384)",3145728,float32,12.0
+transformer.wpe,Embedding,98304,True,"(256,)","(256, 384)",98304,float32,0.375
+transformer.h.0.ln_1,LayerNorm,384,True,"(32, 256, 384)","(32, 256, 384)",3145728,float32,12.0
+transformer.h.0.attn.c_attn,Linear,442368,True,"(32, 256, 384)","(32, 256, 1152)",9437184,bfloat16,18.0
+transformer.h.0.attn.c_proj,Linear,147456,True,"(32, 256, 384)","(32, 256, 384)",3145728,bfloat16,6.0
+transformer.h.0.ln_2,LayerNorm,384,True,"(32, 256, 384)","(32, 256, 384)",3145728,float32,12.0
+transformer.h.0.mlp.c_fc,Linear,589824,True,"(32, 256, 384)","(32, 256, 1536)",12582912,bfloat16,24.0
+transformer.h.0.mlp.gelu,GELU,0,,"(32, 256, 1536)","(32, 256, 1536)",12582912,bfloat16,24.0
+transformer.h.0.mlp.c_proj,Linear,589824,True,"(32, 256, 1536)","(32, 256, 384)",3145728,bfloat16,6.0
+transformer.h.1.ln_1,LayerNorm,384,True,"(32, 256, 384)","(32, 256, 384)",3145728,float32,12.0
+transformer.h.1.attn.c_attn,Linear,442368,True,"(32, 256, 384)","(32, 256, 1152)",9437184,bfloat16,18.0
+transformer.h.1.attn.c_proj,Linear,147456,True,"(32, 256, 384)","(32, 256, 384)",3145728,bfloat16,6.0
+transformer.h.1.ln_2,LayerNorm,384,True,"(32, 256, 384)","(32, 256, 384)",3145728,float32,12.0
+transformer.h.1.mlp.c_fc,Linear,589824,True,"(32, 256, 384)","(32, 256, 1536)",12582912,bfloat16,24.0
+transformer.h.1.mlp.gelu,GELU,0,,"(32, 256, 1536)","(32, 256, 1536)",12582912,bfloat16,24.0
+transformer.h.1.mlp.c_proj,Linear,589824,True,"(32, 256, 1536)","(32, 256, 384)",3145728,bfloat16,6.0
+transformer.h.2.ln_1,LayerNorm,384,True,"(32, 256, 384)","(32, 256, 384)",3145728,float32,12.0
+transformer.h.2.attn.c_attn,Linear,442368,True,"(32, 256, 384)","(32, 256, 1152)",9437184,bfloat16,18.0
+transformer.h.2.attn.c_proj,Linear,147456,True,"(32, 256, 384)","(32, 256, 384)",3145728,bfloat16,6.0
+transformer.h.2.ln_2,LayerNorm,384,True,"(32, 256, 384)","(32, 256, 384)",3145728,float32,12.0
+transformer.h.2.mlp.c_fc,Linear,589824,True,"(32, 256, 384)","(32, 256, 1536)",12582912,bfloat16,24.0
+transformer.h.2.mlp.gelu,GELU,0,,"(32, 256, 1536)","(32, 256, 1536)",12582912,bfloat16,24.0
+transformer.h.2.mlp.c_proj,Linear,589824,True,"(32, 256, 1536)","(32, 256, 384)",3145728,bfloat16,6.0
+transformer.h.3.ln_1,LayerNorm,384,True,"(32, 256, 384)","(32, 256, 384)",3145728,float32,12.0
+transformer.h.3.attn.c_attn,Linear,442368,True,"(32, 256, 384)","(32, 256, 1152)",9437184,bfloat16,18.0
+transformer.h.3.attn.c_proj,Linear,147456,True,"(32, 256, 384)","(32, 256, 384)",3145728,bfloat16,6.0
+transformer.h.3.ln_2,LayerNorm,384,True,"(32, 256, 384)","(32, 256, 384)",3145728,float32,12.0
+transformer.h.3.mlp.c_fc,Linear,589824,True,"(32, 256, 384)","(32, 256, 1536)",12582912,bfloat16,24.0
+transformer.h.3.mlp.gelu,GELU,0,,"(32, 256, 1536)","(32, 256, 1536)",12582912,bfloat16,24.0
+transformer.h.3.mlp.c_proj,Linear,589824,True,"(32, 256, 1536)","(32, 256, 384)",3145728,bfloat16,6.0
+transformer.h.4.ln_1,LayerNorm,384,True,"(32, 256, 384)","(32, 256, 384)",3145728,float32,12.0
+transformer.h.4.attn.c_attn,Linear,442368,True,"(32, 256, 384)","(32, 256, 1152)",9437184,bfloat16,18.0
+transformer.h.4.attn.c_proj,Linear,147456,True,"(32, 256, 384)","(32, 256, 384)",3145728,bfloat16,6.0
+transformer.h.4.ln_2,LayerNorm,384,True,"(32, 256, 384)","(32, 256, 384)",3145728,float32,12.0
+transformer.h.4.mlp.c_fc,Linear,589824,True,"(32, 256, 384)","(32, 256, 1536)",12582912,bfloat16,24.0
+transformer.h.4.mlp.gelu,GELU,0,,"(32, 256, 1536)","(32, 256, 1536)",12582912,bfloat16,24.0
+transformer.h.4.mlp.c_proj,Linear,589824,True,"(32, 256, 1536)","(32, 256, 384)",3145728,bfloat16,6.0
+transformer.h.5.ln_1,LayerNorm,384,True,"(32, 256, 384)","(32, 256, 384)",3145728,float32,12.0
+transformer.h.5.attn.c_attn,Linear,442368,True,"(32, 256, 384)","(32, 256, 1152)",9437184,bfloat16,18.0
+transformer.h.5.attn.c_proj,Linear,147456,True,"(32, 256, 384)","(32, 256, 384)",3145728,bfloat16,6.0
+transformer.h.5.ln_2,LayerNorm,384,True,"(32, 256, 384)","(32, 256, 384)",3145728,float32,12.0
+transformer.h.5.mlp.c_fc,Linear,589824,True,"(32, 256, 384)","(32, 256, 1536)",12582912,bfloat16,24.0
+transformer.h.5.mlp.gelu,GELU,0,,"(32, 256, 1536)","(32, 256, 1536)",12582912,bfloat16,24.0
+transformer.h.5.mlp.c_proj,Linear,589824,True,"(32, 256, 1536)","(32, 256, 384)",3145728,bfloat16,6.0
+transformer.ln_f,LayerNorm,384,True,"(32, 256, 384)","(32, 256, 384)",3145728,float32,12.0
+lm_head,Linear,24960,True,"(32, 256, 384)","(32, 256, 65)",532480,bfloat16,1.015625

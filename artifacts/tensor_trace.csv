@@ -1,0 +1,136 @@
+tensor,symbolic,shape,dtype,device,meaning,shape_ok
+chunk,"[B,T+1]","(32, 257)",int64,cpu,T+1 consecutive characters from a random offset,True
+targets,"[B,T]","(32, 256)",int64,cpu,"chunk[:, 1:], the character that follows each input position",True
+idx,"[B,T]","(32, 256)",int64,cuda,"token ids: B sequences, T positions each",True
+tok_emb,"[B,T,C]","(32, 256, 384)",float32,cuda,"row idx[b,t] of wte: one C-dim vector per token",True
+pos_emb,"[T,C]","(256, 384)",float32,cuda,"learned position vectors; no batch dim, broadcast over B",True
+x0,"[B,T,C]","(32, 256, 384)",float32,cuda,"token + position, the residual stream at layer 0",True
+h.0.in,"[B,T,C]","(32, 256, 384)",float32,cuda,residual stream entering the block,True
+h.0.ln_1,"[B,T,C]","(32, 256, 384)",float32,cuda,"normalised over C, per token; shape unchanged",True
+h.0.attn.qkv,"[B,T,3C]","(32, 256, 1152)",bfloat16,cuda,"one fused projection: Q, K and V for every head, side by side",True
+h.0.attn.q,"[B,T,C]","(32, 256, 384)",bfloat16,cuda,queries before the head split (K and V have the same shape),True
+h.0.attn.q_heads,"[B,H,T,D]","(32, 6, 256, 64)",bfloat16,cuda,C split into H heads of D dims; heads moved next to batch,True
+h.0.attn.k_heads,"[B,H,T,D]","(32, 6, 256, 64)",bfloat16,cuda,"keys, same layout as queries",True
+h.0.attn.v_heads,"[B,H,T,D]","(32, 6, 256, 64)",bfloat16,cuda,"values, same layout as queries",True
+h.0.attn.scores,"[B,H,T,T]","(32, 6, 256, 256)",bfloat16,cuda,"query position t (row) scoring key position s (column), per head",True
+h.0.attn.probs,"[B,H,T,T]","(32, 6, 256, 256)",bfloat16,cuda,"softmax over keys; causal, so the upper triangle is exactly 0",True
+h.0.attn.sdpa_max_abs_diff,[],(),float32,cuda,explicit attention vs the fused SDPA kernel used in training,True
+h.0.attn.y_heads,"[B,H,T,D]","(32, 6, 256, 64)",bfloat16,cuda,per-head weighted sum of values,True
+h.0.attn.y_merged,"[B,T,C]","(32, 256, 384)",bfloat16,cuda,heads concatenated back into one C-wide vector per token,True
+h.0.attn.out,"[B,T,C]","(32, 256, 384)",bfloat16,cuda,"attention output after c_proj, what gets added to the residual",True
+h.0.resid_after_attn,"[B,T,C]","(32, 256, 384)",float32,cuda,residual + attention,True
+h.0.ln_2,"[B,T,C]","(32, 256, 384)",float32,cuda,normalised again before the MLP,True
+h.0.mlp.c_fc,"[B,T,4C]","(32, 256, 1536)",bfloat16,cuda,expanded hidden: each token widened 4x,True
+h.0.mlp.gelu,"[B,T,4C]","(32, 256, 1536)",bfloat16,cuda,"after the nonlinearity, still 4C wide",True
+h.0.mlp.out,"[B,T,C]","(32, 256, 384)",bfloat16,cuda,projected back down to C,True
+h.0.out,"[B,T,C]","(32, 256, 384)",float32,cuda,"residual + MLP, the block output",True
+h.1.in,"[B,T,C]","(32, 256, 384)",float32,cuda,residual stream entering the block,True
+h.1.ln_1,"[B,T,C]","(32, 256, 384)",float32,cuda,"normalised over C, per token; shape unchanged",True
+h.1.attn.qkv,"[B,T,3C]","(32, 256, 1152)",bfloat16,cuda,"one fused projection: Q, K and V for every head, side by side",True
+h.1.attn.q,"[B,T,C]","(32, 256, 384)",bfloat16,cuda,queries before the head split (K and V have the same shape),True
+h.1.attn.q_heads,"[B,H,T,D]","(32, 6, 256, 64)",bfloat16,cuda,C split into H heads of D dims; heads moved next to batch,True
+h.1.attn.k_heads,"[B,H,T,D]","(32, 6, 256, 64)",bfloat16,cuda,"keys, same layout as queries",True
+h.1.attn.v_heads,"[B,H,T,D]","(32, 6, 256, 64)",bfloat16,cuda,"values, same layout as queries",True
+h.1.attn.scores,"[B,H,T,T]","(32, 6, 256, 256)",bfloat16,cuda,"query position t (row) scoring key position s (column), per head",True
+h.1.attn.probs,"[B,H,T,T]","(32, 6, 256, 256)",bfloat16,cuda,"softmax over keys; causal, so the upper triangle is exactly 0",True
+h.1.attn.sdpa_max_abs_diff,[],(),float32,cuda,explicit attention vs the fused SDPA kernel used in training,True
+h.1.attn.y_heads,"[B,H,T,D]","(32, 6, 256, 64)",bfloat16,cuda,per-head weighted sum of values,True
+h.1.attn.y_merged,"[B,T,C]","(32, 256, 384)",bfloat16,cuda,heads concatenated back into one C-wide vector per token,True
+h.1.attn.out,"[B,T,C]","(32, 256, 384)",bfloat16,cuda,"attention output after c_proj, what gets added to the residual",True
+h.1.resid_after_attn,"[B,T,C]","(32, 256, 384)",float32,cuda,residual + attention,True
+h.1.ln_2,"[B,T,C]","(32, 256, 384)",float32,cuda,normalised again before the MLP,True
+h.1.mlp.c_fc,"[B,T,4C]","(32, 256, 1536)",bfloat16,cuda,expanded hidden: each token widened 4x,True
+h.1.mlp.gelu,"[B,T,4C]","(32, 256, 1536)",bfloat16,cuda,"after the nonlinearity, still 4C wide",True
+h.1.mlp.out,"[B,T,C]","(32, 256, 384)",bfloat16,cuda,projected back down to C,True
+h.1.out,"[B,T,C]","(32, 256, 384)",float32,cuda,"residual + MLP, the block output",True
+h.2.in,"[B,T,C]","(32, 256, 384)",float32,cuda,residual stream entering the block,True
+h.2.ln_1,"[B,T,C]","(32, 256, 384)",float32,cuda,"normalised over C, per token; shape unchanged",True
+h.2.attn.qkv,"[B,T,3C]","(32, 256, 1152)",bfloat16,cuda,"one fused projection: Q, K and V for every head, side by side",True
+h.2.attn.q,"[B,T,C]","(32, 256, 384)",bfloat16,cuda,queries before the head split (K and V have the same shape),True
+h.2.attn.q_heads,"[B,H,T,D]","(32, 6, 256, 64)",bfloat16,cuda,C split into H heads of D dims; heads moved next to batch,True
+h.2.attn.k_heads,"[B,H,T,D]","(32, 6, 256, 64)",bfloat16,cuda,"keys, same layout as queries",True
+h.2.attn.v_heads,"[B,H,T,D]","(32, 6, 256, 64)",bfloat16,cuda,"values, same layout as queries",True
+h.2.attn.scores,"[B,H,T,T]","(32, 6, 256, 256)",bfloat16,cuda,"query position t (row) scoring key position s (column), per head",True
+h.2.attn.probs,"[B,H,T,T]","(32, 6, 256, 256)",bfloat16,cuda,"softmax over keys; causal, so the upper triangle is exactly 0",True
+h.2.attn.sdpa_max_abs_diff,[],(),float32,cuda,explicit attention vs the fused SDPA kernel used in training,True
+h.2.attn.y_heads,"[B,H,T,D]","(32, 6, 256, 64)",bfloat16,cuda,per-head weighted sum of values,True
+h.2.attn.y_merged,"[B,T,C]","(32, 256, 384)",bfloat16,cuda,heads concatenated back into one C-wide vector per token,True
+h.2.attn.out,"[B,T,C]","(32, 256, 384)",bfloat16,cuda,"attention output after c_proj, what gets added to the residual",True
+h.2.resid_after_attn,"[B,T,C]","(32, 256, 384)",float32,cuda,residual + attention,True
+h.2.ln_2,"[B,T,C]","(32, 256, 384)",float32,cuda,normalised again before the MLP,True
+h.2.mlp.c_fc,"[B,T,4C]","(32, 256, 1536)",bfloat16,cuda,expanded hidden: each token widened 4x,True
+h.2.mlp.gelu,"[B,T,4C]","(32, 256, 1536)",bfloat16,cuda,"after the nonlinearity, still 4C wide",True
+h.2.mlp.out,"[B,T,C]","(32, 256, 384)",bfloat16,cuda,projected back down to C,True
+h.2.out,"[B,T,C]","(32, 256, 384)",float32,cuda,"residual + MLP, the block output",True
+h.3.in,"[B,T,C]","(32, 256, 384)",float32,cuda,residual stream entering the block,True
+h.3.ln_1,"[B,T,C]","(32, 256, 384)",float32,cuda,"normalised over C, per token; shape unchanged",True
+h.3.attn.qkv,"[B,T,3C]","(32, 256, 1152)",bfloat16,cuda,"one fused projection: Q, K and V for every head, side by side",True
+h.3.attn.q,"[B,T,C]","(32, 256, 384)",bfloat16,cuda,queries before the head split (K and V have the same shape),True
+h.3.attn.q_heads,"[B,H,T,D]","(32, 6, 256, 64)",bfloat16,cuda,C split into H heads of D dims; heads moved next to batch,True
+h.3.attn.k_heads,"[B,H,T,D]","(32, 6, 256, 64)",bfloat16,cuda,"keys, same layout as queries",True
+h.3.attn.v_heads,"[B,H,T,D]","(32, 6, 256, 64)",bfloat16,cuda,"values, same layout as queries",True
+h.3.attn.scores,"[B,H,T,T]","(32, 6, 256, 256)",bfloat16,cuda,"query position t (row) scoring key position s (column), per head",True
+h.3.attn.probs,"[B,H,T,T]","(32, 6, 256, 256)",bfloat16,cuda,"softmax over keys; causal, so the upper triangle is exactly 0",True
+h.3.attn.sdpa_max_abs_diff,[],(),float32,cuda,explicit attention vs the fused SDPA kernel used in training,True
+h.3.attn.y_heads,"[B,H,T,D]","(32, 6, 256, 64)",bfloat16,cuda,per-head weighted sum of values,True
+h.3.attn.y_merged,"[B,T,C]","(32, 256, 384)",bfloat16,cuda,heads concatenated back into one C-wide vector per token,True
+h.3.attn.out,"[B,T,C]","(32, 256, 384)",bfloat16,cuda,"attention output after c_proj, what gets added to the residual",True
+h.3.resid_after_attn,"[B,T,C]","(32, 256, 384)",float32,cuda,residual + attention,True
+h.3.ln_2,"[B,T,C]","(32, 256, 384)",float32,cuda,normalised again before the MLP,True
+h.3.mlp.c_fc,"[B,T,4C]","(32, 256, 1536)",bfloat16,cuda,expanded hidden: each token widened 4x,True
+h.3.mlp.gelu,"[B,T,4C]","(32, 256, 1536)",bfloat16,cuda,"after the nonlinearity, still 4C wide",True
+h.3.mlp.out,"[B,T,C]","(32, 256, 384)",bfloat16,cuda,projected back down to C,True
+h.3.out,"[B,T,C]","(32, 256, 384)",float32,cuda,"residual + MLP, the block output",True
+h.4.in,"[B,T,C]","(32, 256, 384)",float32,cuda,residual stream entering the block,True
+h.4.ln_1,"[B,T,C]","(32, 256, 384)",float32,cuda,"normalised over C, per token; shape unchanged",True
+h.4.attn.qkv,"[B,T,3C]","(32, 256, 1152)",bfloat16,cuda,"one fused projection: Q, K and V for every head, side by side",True
+h.4.attn.q,"[B,T,C]","(32, 256, 384)",bfloat16,cuda,queries before the head split (K and V have the same shape),True
+h.4.attn.q_heads,"[B,H,T,D]","(32, 6, 256, 64)",bfloat16,cuda,C split into H heads of D dims; heads moved next to batch,True
+h.4.attn.k_heads,"[B,H,T,D]","(32, 6, 256, 64)",bfloat16,cuda,"keys, same layout as queries",True
+h.4.attn.v_heads,"[B,H,T,D]","(32, 6, 256, 64)",bfloat16,cuda,"values, same layout as queries",True
+h.4.attn.scores,"[B,H,T,T]","(32, 6, 256, 256)",bfloat16,cuda,"query position t (row) scoring key position s (column), per head",True
+h.4.attn.probs,"[B,H,T,T]","(32, 6, 256, 256)",bfloat16,cuda,"softmax over keys; causal, so the upper triangle is exactly 0",True
+h.4.attn.sdpa_max_abs_diff,[],(),float32,cuda,explicit attention vs the fused SDPA kernel used in training,True
+h.4.attn.y_heads,"[B,H,T,D]","(32, 6, 256, 64)",bfloat16,cuda,per-head weighted sum of values,True
+h.4.attn.y_merged,"[B,T,C]","(32, 256, 384)",bfloat16,cuda,heads concatenated back into one C-wide vector per token,True
+h.4.attn.out,"[B,T,C]","(32, 256, 384)",bfloat16,cuda,"attention output after c_proj, what gets added to the residual",True
+h.4.resid_after_attn,"[B,T,C]","(32, 256, 384)",float32,cuda,residual + attention,True
+h.4.ln_2,"[B,T,C]","(32, 256, 384)",float32,cuda,normalised again before the MLP,True
+h.4.mlp.c_fc,"[B,T,4C]","(32, 256, 1536)",bfloat16,cuda,expanded hidden: each token widened 4x,True
+h.4.mlp.gelu,"[B,T,4C]","(32, 256, 1536)",bfloat16,cuda,"after the nonlinearity, still 4C wide",True
+h.4.mlp.out,"[B,T,C]","(32, 256, 384)",bfloat16,cuda,projected back down to C,True
+h.4.out,"[B,T,C]","(32, 256, 384)",float32,cuda,"residual + MLP, the block output",True
+h.5.in,"[B,T,C]","(32, 256, 384)",float32,cuda,residual stream entering the block,True
+h.5.ln_1,"[B,T,C]","(32, 256, 384)",float32,cuda,"normalised over C, per token; shape unchanged",True
+h.5.attn.qkv,"[B,T,3C]","(32, 256, 1152)",bfloat16,cuda,"one fused projection: Q, K and V for every head, side by side",True
+h.5.attn.q,"[B,T,C]","(32, 256, 384)",bfloat16,cuda,queries before the head split (K and V have the same shape),True
+h.5.attn.q_heads,"[B,H,T,D]","(32, 6, 256, 64)",bfloat16,cuda,C split into H heads of D dims; heads moved next to batch,True
+h.5.attn.k_heads,"[B,H,T,D]","(32, 6, 256, 64)",bfloat16,cuda,"keys, same layout as queries",True
+h.5.attn.v_heads,"[B,H,T,D]","(32, 6, 256, 64)",bfloat16,cuda,"values, same layout as queries",True
+h.5.attn.scores,"[B,H,T,T]","(32, 6, 256, 256)",bfloat16,cuda,"query position t (row) scoring key position s (column), per head",True
+h.5.attn.probs,"[B,H,T,T]","(32, 6, 256, 256)",bfloat16,cuda,"softmax over keys; causal, so the upper triangle is exactly 0",True
+h.5.attn.sdpa_max_abs_diff,[],(),float32,cuda,explicit attention vs the fused SDPA kernel used in training,True
+h.5.attn.y_heads,"[B,H,T,D]","(32, 6, 256, 64)",bfloat16,cuda,per-head weighted sum of values,True
+h.5.attn.y_merged,"[B,T,C]","(32, 256, 384)",bfloat16,cuda,heads concatenated back into one C-wide vector per token,True
+h.5.attn.out,"[B,T,C]","(32, 256, 384)",bfloat16,cuda,"attention output after c_proj, what gets added to the residual",True
+h.5.resid_after_attn,"[B,T,C]","(32, 256, 384)",float32,cuda,residual + attention,True
+h.5.ln_2,"[B,T,C]","(32, 256, 384)",float32,cuda,normalised again before the MLP,True
+h.5.mlp.c_fc,"[B,T,4C]","(32, 256, 1536)",bfloat16,cuda,expanded hidden: each token widened 4x,True
+h.5.mlp.gelu,"[B,T,4C]","(32, 256, 1536)",bfloat16,cuda,"after the nonlinearity, still 4C wide",True
+h.5.mlp.out,"[B,T,C]","(32, 256, 384)",bfloat16,cuda,projected back down to C,True
+h.5.out,"[B,T,C]","(32, 256, 384)",float32,cuda,"residual + MLP, the block output",True
+ln_f,"[B,T,C]","(32, 256, 384)",float32,cuda,"final hidden state, normalised",True
+logits,"[B,T,V]","(32, 256, 65)",bfloat16,cuda,"unnormalised score for each of V next characters, at every position",True
+logits_flat,"[B*T,V]","(8192, 65)",float32,cuda,every position becomes one row of a B*T-way classification,True
+targets_flat,[B*T],"(8192,)",int64,cuda,the class index each row should pick,True
+valid_mask,[B*T],"(8192,)",bool,cuda,targets != -100; all True here (dense chunks have no padding),True
+loss_sum,[],(),float32,cuda,summed cross-entropy over valid targets,True
+n_valid,[],(),int64,cuda,"number of valid targets, the divisor",True
+loss,[],(),float32,cuda,"mean per-token loss, the one number backward() starts from",True
+grad[transformer.wte.weight],"[V,C]","(65, 384)",float32,cuda,same shape as the weight: one number per weight,True
+grad[transformer.wpe.weight],"[Tmax,C]","(256, 384)",float32,cuda,same shape as the weight: one number per weight,True
+grad[transformer.h.0.attn.c_attn.weight],"[3C,C]","(1152, 384)",float32,cuda,same shape as the weight: one number per weight,True
+grad[transformer.h.0.attn.c_proj.weight],"[C,C]","(384, 384)",float32,cuda,same shape as the weight: one number per weight,True
+grad[transformer.h.0.mlp.c_fc.weight],"[4C,C]","(1536, 384)",float32,cuda,same shape as the weight: one number per weight,True
+grad[transformer.h.0.mlp.c_proj.weight],"[C,4C]","(384, 1536)",float32,cuda,same shape as the weight: one number per weight,True
+grad[transformer.ln_f.weight],[C],"(384,)",float32,cuda,same shape as the weight: one number per weight,True

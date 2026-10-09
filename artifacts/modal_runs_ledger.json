@@ -1,0 +1,31 @@
+{
+  "app": "era-v5-ass10-trainloop",
+  "gpu": "NVIDIA A10G (Modal gpu='A10G')",
+  "image_build_seconds_first_run": 68.9,
+  "rates_used": "modal billing rates on 2026-10-02: A10G $1.10/h, CPU $0.0473/core/h (4 cores), memory $0.008/GiB/h (16 GiB)",
+  "runs": [
+    {
+      "run": "pilot",
+      "remote_call_seconds": 295.77,
+      "notebook_execute_seconds": 271.36,
+      "approx_cost_usd": 0.116,
+      "outcome": "stopped by check 'timed window > 1 s' (micro-batch 8 timed for 0.7 s); outputs used only to design the grad-norm rule"
+    },
+    {
+      "run": "second",
+      "remote_call_seconds": 299.42,
+      "notebook_execute_seconds": 283.21,
+      "approx_cost_usd": 0.118,
+      "outcome": "stopped by check 'timed window >= 5 s' (4.99 s); timing target raised to 6 s"
+    },
+    {
+      "run": "final (this notebook)",
+      "remote_call_seconds": 350.48,
+      "notebook_execute_seconds": 337.63,
+      "approx_cost_usd": 0.138,
+      "outcome": "all checks passed"
+    }
+  ],
+  "total_gpu_container_seconds": 945.7,
+  "total_approx_cost_usd": 0.372
+}

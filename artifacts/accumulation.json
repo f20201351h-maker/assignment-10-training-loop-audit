@@ -1,0 +1,98 @@
+{
+  "windows": 600,
+  "micro_batches_per_window": 4,
+  "seqs_per_micro_batch": 8,
+  "valid_targets_per_micro_batch": {
+    "min": 154,
+    "median": 703.5,
+    "max": 2048
+  },
+  "max_over_min_in_window": {
+    "min": 5.662251655629139,
+    "median": 7.76114081996435,
+    "max": 12.746753246753247
+  },
+  "window_1_counts": [
+    286,
+    1799,
+    502,
+    908
+  ],
+  "reported_loss_last100_mean": {
+    "correct": 1.551718888282776,
+    "broken": 1.552822185754776
+  },
+  "true_loss_last100_mean": {
+    "correct": 1.551718888282776,
+    "broken": 1.750086306333542
+  },
+  "broken_reported_minus_true_last100": -0.19726412057876586,
+  "final_val": {
+    "correct": {
+      "step": 600.0,
+      "val_all": 1.8039906553054113,
+      "val_short": 1.8875523919350683,
+      "val_long": 1.8238201661438347
+    },
+    "broken": {
+      "step": 600.0,
+      "val_all": 1.9509357168387247,
+      "val_short": 1.9187761296983388,
+      "val_long": 2.0393372629898
+    }
+  },
+  "cosine_broken_vs_correct": {
+    "mean": 0.8354271365616861,
+    "min": 0.7559955308153925
+  },
+  "rel_err_broken_vs_correct": {
+    "mean": 0.6174305770637537
+  },
+  "reference_checks": {
+    "unequal_window_1_at_init": {
+      "full_batch_loss": 4.273672103881836,
+      "token": {
+        "reported_loss": 4.273671627044678,
+        "rel_l2_err": 3.1732545364500036e-07,
+        "cosine": 0.9999999999999497,
+        "norm_ratio": 0.9999999855609161
+      },
+      "mean_of_means": {
+        "reported_loss": 4.261758804321289,
+        "rel_l2_err": 0.17913177327880503,
+        "cosine": 0.9847896981844463,
+        "norm_ratio": 0.9412128482728015
+      }
+    },
+    "equal_counts_window_at_init": {
+      "full_batch_loss": 4.287900447845459,
+      "token": {
+        "reported_loss": 4.287900447845459,
+        "rel_l2_err": 2.7724250564972435e-07,
+        "cosine": 0.9999999999999618,
+        "norm_ratio": 1.000000001724431
+      },
+      "mean_of_means": {
+        "reported_loss": 4.287900447845459,
+        "rel_l2_err": 2.7724250564972435e-07,
+        "cosine": 0.9999999999999618,
+        "norm_ratio": 1.000000001724431
+      }
+    },
+    "unequal_last_window_at_end_of_correct_run": {
+      "full_batch_loss": 1.5117552280426025,
+      "token": {
+        "reported_loss": 1.5117554664611816,
+        "rel_l2_err": 1.1008893295976227e-06,
+        "cosine": 0.9999999999993997,
+        "norm_ratio": 0.9999998946593387
+      },
+      "mean_of_means": {
+        "reported_loss": 1.421968698501587,
+        "rel_l2_err": 0.7410453143364925,
+        "cosine": 0.7540770339400359,
+        "norm_ratio": 1.0972684251722071
+      }
+    }
+  }
+}

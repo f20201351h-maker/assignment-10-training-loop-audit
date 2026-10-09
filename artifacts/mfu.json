@@ -1,0 +1,229 @@
+{
+  "matmul_ceiling": [
+    {
+      "matmul (bf16)": "8192 x 8192 x 8192 (big square)",
+      "TFLOP/s": 66.60824885810558,
+      "% of 70 TF peak": 95.15464122586512
+    },
+    {
+      "matmul (bf16)": "c_attn: [8192x384] @ [384x1152]",
+      "TFLOP/s": 42.66301290766697,
+      "% of 70 TF peak": 60.9471612966671
+    },
+    {
+      "matmul (bf16)": "attn c_proj: [8192x384] @ [384x384]",
+      "TFLOP/s": 43.12220778805374,
+      "% of 70 TF peak": 61.60315398293391
+    },
+    {
+      "matmul (bf16)": "mlp c_fc: [8192x384] @ [384x1536]",
+      "TFLOP/s": 46.07989013704229,
+      "% of 70 TF peak": 65.82841448148899
+    },
+    {
+      "matmul (bf16)": "mlp c_proj: [8192x1536] @ [1536x384]",
+      "TFLOP/s": 50.928847088135605,
+      "% of 70 TF peak": 72.75549584019372
+    },
+    {
+      "matmul (bf16)": "lm_head: [8192x384] @ [384x65]",
+      "TFLOP/s": 12.108640758773486,
+      "% of 70 TF peak": 17.29805822681927
+    }
+  ],
+  "fp32_8192_tf32_on_TF": 34.00125253710944,
+  "fp32_8192_tf32_off_TF": 23.00350078774418,
+  "compile_first_step_s": 28.696705102920532,
+  "gpu": "NVIDIA A10G",
+  "peak": {
+    "bf16": 70000000000000.0,
+    "fp32_tf32": 35000000000000.0,
+    "fp32": 35000000000000.0,
+    "source": "NVIDIA A10G datasheet (AWS, 2022-02-17): FP32 35 TF; TF32 35|70*; BF16 70|140*; *=sparsity"
+  },
+  "N": 10745088,
+  "N_matmul": 10646784,
+  "attn_flops_per_token": 7077888,
+  "flops_per_token_6N": 64470528,
+  "timing": "warm-up 15 steps + 5 calibration steps, then max(60 steps, ~6 s), cuda.synchronize before/after",
+  "table": [
+    {
+      "config": "A. main config (B=32 x accum 2), CPU sampling + H2D each step",
+      "tok/s": 349210.5803503755,
+      "achieved TFLOP/s (6N)": 22.513790498375133,
+      "MFU % (6N)": 32.16255785482162,
+      "MFU % (6N_matmul + attention)": 35.39927299023644,
+      "ms/step": 46.91724971093758,
+      "timed steps": 128,
+      "timed s": 6.00540796300001,
+      "peak TF used": 70.0
+    },
+    {
+      "config": "B. main config, batches pre-staged on GPU",
+      "tok/s": 351964.21550597163,
+      "achieved TFLOP/s (6N)": 22.691318810775776,
+      "MFU % (6N)": 32.41616972967969,
+      "MFU % (6N_matmul + attention)": 35.67840738098331,
+      "ms/step": 46.55018686046513,
+      "timed steps": 129,
+      "timed s": 6.004974105000002,
+      "peak TF used": 70.0
+    },
+    {
+      "config": "C. main config, forward+backward only (no clip, no AdamW)",
+      "tok/s": 363733.2383700877,
+      "achieved TFLOP/s (6N)": 23.450073928869415,
+      "MFU % (6N)": 33.500105612670595,
+      "MFU % (6N_matmul + attention)": 36.87142636905971,
+      "ms/step": 45.04400002985092,
+      "timed steps": 134,
+      "timed s": 6.035896004000023,
+      "peak TF used": 70.0
+    },
+    {
+      "config": "D. micro-batch 8 x accum 1 (2,048 tok/step), pre-staged",
+      "tok/s": 209135.91771834836,
+      "achieved TFLOP/s (6N)": 13.483103039066474,
+      "MFU % (6N)": 19.261575770094964,
+      "MFU % (6N_matmul + attention)": 21.199986082745504,
+      "ms/step": 9.792674650741356,
+      "timed steps": 607,
+      "timed s": 5.944153513000003,
+      "peak TF used": 70.0
+    },
+    {
+      "config": "D. micro-batch 16 x accum 1 (4,096 tok/step), pre-staged",
+      "tok/s": 294992.3243429185,
+      "achieved TFLOP/s (6N)": 19.018310906335213,
+      "MFU % (6N)": 27.16901558047887,
+      "MFU % (6N_matmul + attention)": 29.903199980258318,
+      "ms/step": 13.885107041763364,
+      "timed steps": 431,
+      "timed s": 5.98448113500001,
+      "peak TF used": 70.0
+    },
+    {
+      "config": "D. micro-batch 32 x accum 1 (8,192 tok/step), pre-staged",
+      "tok/s": 342700.92346647976,
+      "achieved TFLOP/s (6N)": 22.09410948197154,
+      "MFU % (6N)": 31.563013545673627,
+      "MFU % (6N_matmul + attention)": 34.73939286611595,
+      "ms/step": 23.904225051792938,
+      "timed steps": 251,
+      "timed s": 5.999960488000028,
+      "peak TF used": 70.0
+    },
+    {
+      "config": "D. micro-batch 64 x accum 1 (16,384 tok/step), pre-staged",
+      "tok/s": 376153.27767728484,
+      "achieved TFLOP/s (6N)": 24.25080042078517,
+      "MFU % (6N)": 34.64400060112167,
+      "MFU % (6N_matmul + attention)": 38.130438514521664,
+      "ms/step": 43.55671204347823,
+      "timed steps": 138,
+      "timed s": 6.010826261999995,
+      "peak TF used": 70.0
+    },
+    {
+      "config": "D. micro-batch 128 x accum 1 (32,768 tok/step), pre-staged",
+      "tok/s": 390545.10957701557,
+      "achieved TFLOP/s (6N)": 25.17864942224805,
+      "MFU % (6N)": 35.96949917464007,
+      "MFU % (6N_matmul + attention)": 39.589330125815344,
+      "ms/step": 83.90323984722217,
+      "timed steps": 72,
+      "timed s": 6.041033268999996,
+      "peak TF used": 70.0
+    },
+    {
+      "config": "E. main config + torch.compile, pre-staged",
+      "tok/s": 408495.2747742896,
+      "achieved TFLOP/s (6N)": 26.33590605020353,
+      "MFU % (6N)": 37.62272292886219,
+      "MFU % (6N_matmul + attention)": 41.40892790948101,
+      "ms/step": 40.108175080000215,
+      "timed steps": 150,
+      "timed s": 6.016226262000032,
+      "peak TF used": 70.0
+    },
+    {
+      "config": "F. main config, fp32, TF32 off, pre-staged",
+      "tok/s": 177510.76834910712,
+      "achieved TFLOP/s (6N)": 11.444212961152624,
+      "MFU % (6N)": 32.69775131757893,
+      "MFU % (6N_matmul + attention)": 35.98832624825944,
+      "ms/step": 92.29862589393953,
+      "timed steps": 66,
+      "timed s": 6.091709309000009,
+      "peak TF used": 35.0
+    },
+    {
+      "config": "F. main config, fp32 with TF32 matmuls, pre-staged",
+      "tok/s": 200127.86063664875,
+      "achieved TFLOP/s (6N)": 12.902348842755162,
+      "MFU % (6N)": 36.86385383644331,
+      "MFU % (6N_matmul + attention)": 40.573689173568056,
+      "ms/step": 81.8676617432428,
+      "timed steps": 74,
+      "timed s": 6.0582069689999685,
+      "peak TF used": 35.0
+    }
+  ],
+  "main_run_logged_tok_per_s_median": 345258.74180900643,
+  "profile": {
+    "kernel_ms_per_step": 47.446083199999904,
+    "wall_ms_per_step_unprofiled": 46.55018686046513,
+    "gpu_busy_pct": 101.92458161815813,
+    "launches_per_step": 768.0,
+    "breakdown": [
+      {
+        "category": "matmul (GEMM)",
+        "ms_per_step": 22.30337979999995,
+        "launches_per_step": 188.0,
+        "% of kernel time": 47.0078419455286
+      },
+      {
+        "category": "elementwise / other",
+        "ms_per_step": 13.779233599999984,
+        "launches_per_step": 404.0,
+        "% of kernel time": 29.041878002692567
+      },
+      {
+        "category": "attention kernel (SDPA)",
+        "ms_per_step": 4.2898021999999845,
+        "launches_per_step": 48.0,
+        "% of kernel time": 9.041425362589242
+      },
+      {
+        "category": "layernorm",
+        "ms_per_step": 3.754062999999982,
+        "launches_per_step": 52.0,
+        "% of kernel time": 7.91227167093108
+      },
+      {
+        "category": "optimizer (fused AdamW, foreach)",
+        "ms_per_step": 2.7121690000000016,
+        "launches_per_step": 7.0,
+        "% of kernel time": 5.716318012105176
+      },
+      {
+        "category": "softmax / loss",
+        "ms_per_step": 0.45457960000001807,
+        "launches_per_step": 8.0,
+        "% of kernel time": 0.958097211278378
+      },
+      {
+        "category": "reductions (incl. grad-norm)",
+        "ms_per_step": 0.07938760000000657,
+        "launches_per_step": 5.0,
+        "% of kernel time": 0.1673217147669773
+      },
+      {
+        "category": "memcpy/memset",
+        "ms_per_step": 0.07346839999997501,
+        "launches_per_step": 56.0,
+        "% of kernel time": 0.15484608010798911
+      }
+    ]
+  }
+}

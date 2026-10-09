@@ -1,0 +1,9 @@
+{
+  "app": "era-v5-ass10-trainloop",
+  "gpu_requested": "A10G",
+  "mode": "full",
+  "notebook_execute_seconds": 337.6326608657837,
+  "remote_call_seconds_incl_container_start": 350.4825141429901,
+  "approx_cost_usd": 0.138,
+  "error": null
+}

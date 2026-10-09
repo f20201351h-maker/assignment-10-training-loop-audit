@@ -1,0 +1,111 @@
+{
+  "rule": "trailing median w=101, alarm at running min + 3 SE, after step 300",
+  "event_step": 830,
+  "loss_reacts_step": 904,
+  "lead_steps": 74,
+  "natural_or_induced": "natural (no intervention)",
+  "turning_points": [
+    {
+      "window": 25,
+      "grad_norm_min_step": 721,
+      "probe_loss_min_step": 856,
+      "norm_leads_by": 135
+    },
+    {
+      "window": 51,
+      "grad_norm_min_step": 734,
+      "probe_loss_min_step": 841,
+      "norm_leads_by": 107
+    },
+    {
+      "window": 101,
+      "grad_norm_min_step": 712,
+      "probe_loss_min_step": 818,
+      "norm_leads_by": 106
+    },
+    {
+      "window": 151,
+      "grad_norm_min_step": 734,
+      "probe_loss_min_step": 794,
+      "norm_leads_by": 60
+    }
+  ],
+  "alarms": [
+    {
+      "window": 25,
+      "k": 3,
+      "grad_norm_alarm": 316,
+      "probe_loss_alarm": 529,
+      "lead": 213,
+      "se_grad_norm": 0.008493962429396868,
+      "se_probe": 0.001629500398100853
+    },
+    {
+      "window": 25,
+      "k": 5,
+      "grad_norm_alarm": 400,
+      "probe_loss_alarm": 882,
+      "lead": 482,
+      "se_grad_norm": 0.008493962429396868,
+      "se_probe": 0.001629500398100853
+    },
+    {
+      "window": 51,
+      "k": 3,
+      "grad_norm_alarm": 351,
+      "probe_loss_alarm": 892,
+      "lead": 541,
+      "se_grad_norm": 0.006409741388455594,
+      "se_probe": 0.0013924133042980992
+    },
+    {
+      "window": 51,
+      "k": 5,
+      "grad_norm_alarm": 833,
+      "probe_loss_alarm": 899,
+      "lead": 66,
+      "se_grad_norm": 0.006409741388455594,
+      "se_probe": 0.0013924133042980992
+    },
+    {
+      "window": 101,
+      "k": 3,
+      "grad_norm_alarm": 830,
+      "probe_loss_alarm": 904,
+      "lead": 74,
+      "se_grad_norm": 0.0047220659540011785,
+      "se_probe": 0.001044879818561562
+    },
+    {
+      "window": 101,
+      "k": 5,
+      "grad_norm_alarm": 853,
+      "probe_loss_alarm": 917,
+      "lead": 64,
+      "se_grad_norm": 0.0047220659540011785,
+      "se_probe": 0.001044879818561562
+    }
+  ],
+  "val_min_step": 850,
+  "event_grad_norm": 0.6679394245147705,
+  "trailing_median_grad_norm_at_event": 0.5966615676879883,
+  "trailing_median_grad_norm_min": 0.582393229007721,
+  "trailing_median_grad_norm_min_step": 762,
+  "probe_loss_trailing_at_event": 1.462424635887146,
+  "probe_loss_trailing_min_so_far_at_event": 1.462424635887146,
+  "train_loss_trailing_at_event": 1.1852145195007324,
+  "lr_at_event": 0.0005197289474745822,
+  "clipped_steps_first_50": 30,
+  "per_block_norm_change_min_to_event": {
+    "gn_wte/lm_head": 0.9865366928171284,
+    "gn_wpe": 1.0067805449549778,
+    "gn_h.0": 1.0384634906026544,
+    "gn_h.1": 1.0641453827022063,
+    "gn_h.2": 1.0549395318907537,
+    "gn_h.3": 1.056247124637915,
+    "gn_h.4": 1.0580421263479889,
+    "gn_h.5": 1.0566967771283646,
+    "gn_ln_f": 0.9807108328941129
+  },
+  "grad_norm_trailing_at_loss_reaction": 0.6188623905181885
+}
